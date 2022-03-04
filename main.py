@@ -4,6 +4,7 @@ from snake import Snake
 from food import Food
 from scoreboard import Score
 
+# start = False
 screen = Screen()
 screen.bgcolor('black')
 screen.title('Snake Game')
@@ -14,30 +15,43 @@ lily = Snake()
 food = Food()
 score = Score()
 
-screen.listen()
-screen.onkey(lily.up, 'Up')
-screen.onkey(lily.down, 'Down')
-screen.onkey(lily.left, 'Left')
-screen.onkey(lily.right, 'Right')
+if score.ready():
+    score.clear()
 
-scoreboard = 0
-start = True
-while start:
-    screen.update()
-    time.sleep(0.1)
-    lily.move()
 
-#     Detect collision with food
-    if lily.head.distance(food) < 15:
-        print("non nom nom")
-        food.relocate()
-        lily.add_segment()
+def start_game():
+    start = True
+    while start:
+        screen.update()
+        time.sleep(0.1)
+        lily.move()
+
+        #     Detect collision with food
+        if lily.head.distance(food) < 19:
+            print("non nom nom")
+            food.relocate()
+            lily.extend()
+            score.add_score()
 
         #     Detect collision with food
         if lily.head.xcor() > 280 or lily.head.xcor() < -280 or lily.head.ycor() > 280 or lily.head.ycor() < -280:
             start = False
             score.game_over()
 
-        score.add_score()
+        #     Detect collision with food
+        for segment in lily.snake[1:]:
+            if lily.head.distance(segment) < 10:
+                start = False
+                score.game_over()
+
         screen.update()
+
+
+screen.listen()
+screen.onkey(start_game, 'y')
+screen.onkey(lily.up, 'Up')
+screen.onkey(lily.down, 'Down')
+screen.onkey(lily.move_left, 'Left')
+screen.onkey(lily.move_right, 'Right')
+
 screen.exitonclick()

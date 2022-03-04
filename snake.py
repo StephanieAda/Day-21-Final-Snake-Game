@@ -4,7 +4,7 @@ UP = 90
 DOWN = 270
 LEFT = 180
 RIGHT = 0
-snake_segment = 3
+STARTING_POSITIONS = [(0, 0), (-20,0), (-40, 0)]
 
 
 class Snake(Turtle):
@@ -17,22 +17,20 @@ class Snake(Turtle):
         self.head = self.snake[0]
         self.penup()
 
-    def add_segment(self):
-        self.snake_segment += 1
-        self.clear()
-        self.create_snake()
-
     def create_snake(self):
-        self.speed('fastest')
-        xcor = 0
-        for i in range(0, snake_segment-2):
-            lily = Turtle()
-            lily.color('white')
-            lily.shape('square')
-            lily.penup()
-            lily.setx(xcor)
-            xcor += -20
-            self.snake.append(lily)
+        for position in STARTING_POSITIONS:
+            self.add_segments(position)
+
+    def add_segments(self, position):
+        lily = Turtle()
+        lily.color('white')
+        lily.shape('square')
+        lily.penup()
+        lily.goto(position)
+        self.snake.append(lily)
+
+    def extend(self):
+        self.add_segments(self.snake[-1].position())
 
     def move(self):
 
@@ -51,10 +49,10 @@ class Snake(Turtle):
         if self.head.heading() != UP:
             self.snake[0].setheading(270)
 
-    def left(self):
+    def move_left(self):
         if self.head.heading() != RIGHT:
             self.snake[0].setheading(180)
 
-    def right(self):
+    def move_right(self):
         if self.head.heading() != LEFT:
             self.head.setheading(0)
