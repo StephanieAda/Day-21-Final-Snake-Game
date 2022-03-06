@@ -4,7 +4,7 @@ UP = 90
 DOWN = 270
 LEFT = 180
 RIGHT = 0
-STARTING_POSITIONS = [(0, 0), (-20,0), (-40, 0)]
+STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
 
 
 class Snake(Turtle):
@@ -15,6 +15,7 @@ class Snake(Turtle):
         self.snake = []
         self.create_snake()
         self.head = self.snake[0]
+        self.head.color('brown')
         self.penup()
 
     def create_snake(self):
@@ -23,8 +24,8 @@ class Snake(Turtle):
 
     def add_segments(self, position):
         lily = Turtle()
-        lily.color('white')
-        lily.shape('square')
+        lily.color('salmon1')
+        lily.shape('circle')
         lily.penup()
         lily.goto(position)
         self.snake.append(lily)

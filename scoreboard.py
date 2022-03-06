@@ -24,7 +24,7 @@ class Score(Turtle):
         # return True//
 
     def game_over(self):
-        self.goto(0,0)
+        self.goto(0, 0)
         self.write('GAME OVER', False, align=ALIGNMENT, font=FONT)
 
     def add_score(self):

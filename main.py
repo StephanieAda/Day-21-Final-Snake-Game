@@ -23,7 +23,7 @@ def start_game():
     start = True
     while start:
         screen.update()
-        time.sleep(0.1)
+        time.sleep(0.15)
         lily.move()
 
         #     Detect collision with food
@@ -33,8 +33,8 @@ def start_game():
             lily.extend()
             score.add_score()
 
-        #     Detect collision with food
-        if lily.head.xcor() > 280 or lily.head.xcor() < -280 or lily.head.ycor() > 280 or lily.head.ycor() < -280:
+        #     Detect collision with wall
+        if lily.head.xcor() > 290 or lily.head.xcor() < -290 or lily.head.ycor() > 290 or lily.head.ycor() < -290:
             start = False
             score.game_over()
 
@@ -49,9 +49,9 @@ def start_game():
 
 screen.listen()
 screen.onkey(start_game, 'y')
-screen.onkey(lily.up, 'Up')
-screen.onkey(lily.down, 'Down')
-screen.onkey(lily.move_left, 'Left')
-screen.onkey(lily.move_right, 'Right')
+screen.onkey(lily.up, '8')
+screen.onkey(lily.down, '2')
+screen.onkey(lily.move_left, '4')
+screen.onkey(lily.move_right, '6')
 
 screen.exitonclick()
