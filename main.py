@@ -49,9 +49,9 @@ def start_game():
 
 screen.listen()
 screen.onkey(start_game, 'y')
-screen.onkey(lily.up, '8')
-screen.onkey(lily.down, '2')
-screen.onkey(lily.move_left, '4')
-screen.onkey(lily.move_right, '6')
+screen.onkey(lily.up, 'Up')
+screen.onkey(lily.down, 'Down')
+screen.onkey(lily.move_left, 'Left')
+screen.onkey(lily.move_right, 'Right')
 
 screen.exitonclick()
